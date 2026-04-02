@@ -6,7 +6,7 @@ app = FastAPI()
 
 def get_chile_time() -> dict:
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)  # <- cambiamos a False
+        browser = p.chromium.launch(headless=True)  # <- cambiamos a False
         page = browser.new_page()
         page.goto("https://www.horaoficial.cl", wait_until="domcontentloaded")
         page.wait_for_timeout(5000)  # esperamos 5 segundos a que cargue el JS
