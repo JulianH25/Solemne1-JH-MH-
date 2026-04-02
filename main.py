@@ -6,10 +6,10 @@ app = FastAPI()
 
 def get_chile_time() -> dict:
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)  # <- cambiamos a False
+        browser = p.chromium.launch(headless=False)  
         page = browser.new_page()
         page.goto("https://www.horaoficial.cl", wait_until="domcontentloaded")
-        page.wait_for_timeout(5000)  # esperamos 5 segundos a que cargue el JS
+        page.wait_for_timeout(5000)  
         
         hora  = page.inner_text("#timer2")
         fecha = page.inner_text("#fecha2")
@@ -22,7 +22,6 @@ def get_chile_time() -> dict:
             "fecha": fecha.strip(),
             "dia": dia.strip()
         }
-
 @app.get("/time")
 def read_time():
     return get_chile_time()
